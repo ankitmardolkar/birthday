@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bhargavi — Sweet 16</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+body{
+  margin:0;height:100vh;display:flex;justify-content:center;align-items:center;
+  background:linear-gradient(135deg,#fbe7f3,#e9dcff);
+  font-family:'Poppins',system-ui,sans-serif;
+  overflow:hidden;
+}
+.book{width:900px;height:560px;position:relative}
+
+/* AESTHETIC PAGE */
+.page{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(circle at top left,rgba(255,255,255,.9),rgba(255,255,255,.6)),
+    repeating-linear-gradient(45deg,rgba(255,192,203,.08),rgba(255,192,203,.08) 2px,transparent 2px,transparent 8px);
+  border-radius:26px;
+  box-shadow:0 35px 80px rgba(0,0,0,.28);
+  padding:44px;display:none;
+}
+.page.active{display:block}
+
+/* text */
+h1{margin:0;color:#ff4f81;font-size:34px}
+.name{
+  font-size:54px;font-weight:900;
+  background:linear-gradient(90deg,#ff4f81,#a855f7);
+  -webkit-background-clip:text;color:transparent;
+}
+.hand{font-family:'Pacifico',cursive}
+.sub{color:#666;margin-top:10px}
+
+/* layout */
+.content{
+  display:grid;
+  grid-template-columns:1fr 1.3fr;
+  gap:34px;
+  margin-top:32px;
+  align-items:center;
+}
+.photo{position:relative}
+.photo img{
+  width:250px;height:210px;object-fit:cover;
+  border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,.22);
+}
+.tape{
+  position:absolute;top:-12px;left:50%;
+  transform:translateX(-50%) rotate(-6deg);
+  width:76px;height:24px;
+  background:rgba(255,210,230,.9);
+  border-radius:4px;
+}
+.letter{font-size:18px;line-height:1.75;color:#333}
+
+/* controls */
+.controls{position:absolute;bottom:24px;right:34px}
+.btn{
+  background:linear-gradient(90deg,#ff4f81,#ff9966);
+  border:none;color:#fff;
+  padding:14px 28px;border-radius:32px;
+  font-weight:700;cursor:pointer;margin-left:10px;
+}
+.page-num{
+  position:absolute;bottom:26px;left:50%;
+  transform:translateX(-50%);
+  font-size:13px;color:#777;
+}
+.music{
+  position:absolute;top:24px;left:30px;
+  font-size:14px;color:#ff4f81;font-weight:700;
+}
+
+/* ANIMATIONS */
+.butterfly{position:absolute;font-size:26px;opacity:.8;animation:fly 20s linear infinite}
+.b1{top:12%;left:-10%}
+.b2{top:45%;left:-15%;animation-delay:7s}
+.b3{top:72%;left:-20%;animation-delay:14s}
+@keyframes fly{0%{transform:translateX(0)}100%{transform:translateX(120vw)}}
+
+.heart{position:absolute;font-size:18px;opacity:.6;animation:floatUp 12s linear infinite}
+.h1{left:20%;bottom:-10%}
+.h2{left:50%;bottom:-15%;animation-delay:4s}
+.h3{left:75%;bottom:-20%;animation-delay:8s}
+@keyframes floatUp{0%{transform:translateY(0)}100%{transform:translateY(-120vh)}}
+
+.sparkle{position:absolute;font-size:14px;opacity:.5;animation:twinkle 4s ease-in-out infinite}
+.s1{top:25%;left:30%}
+.s2{top:60%;left:65%}
+.s3{top:40%;left:80%}
+@keyframes twinkle{0%,100%{opacity:.2}50%{opacity:.7}}
+
+.cloud{position:absolute;font-size:52px;opacity:.14;animation:drift 60s linear infinite}
+.c1{top:6%;left:-20%}
+.c2{top:22%;left:-40%;animation-delay:30s}
+@keyframes drift{0%{transform:translateX(0)}100%{transform:translateX(140vw)}}
+
+/* CAKE */
+.cake{
+  position:absolute;
+  right:70px;
+  bottom:130px;
+  font-size:96px;
+  animation:bounce 3s ease-in-out infinite;
+}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+/* candle flicker */
+.flame{
+  position:absolute;
+  top:-22px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:24px;
+  animation:flicker .25s infinite alternate;
+}
+@keyframes flicker{
+  from{opacity:.6;transform:translateX(-50%) scale(1)}
+  to{opacity:1;transform:translateX(-50%) scale(1.15)}
+}
+
+
+/* TOP-DOWN AMBIENT ANIMATIONS */
+.heartFloat{
+  position:absolute;
+  top:-15%;
+  font-size:20px;
+  opacity:.5;
+  animation: fallHeart 14s linear infinite;
+}
+.hf1{left:15%}
+.hf2{left:40%;animation-delay:4s}
+.hf3{left:65%;animation-delay:8s}
+.hf4{left:85%;animation-delay:12s}
+
+@keyframes fallHeart{
+  from{transform:translateY(0)}
+  to{transform:translateY(140vh)}
+}
+
+.star{
+  position:absolute;
+  top:-10%;
+  font-size:16px;
+  opacity:.6;
+  animation: fallStar 10s linear infinite;
+}
+.star1{left:20%}
+.star2{left:50%;animation-delay:3s}
+.star3{left:70%;animation-delay:6s}
+.star4{left:85%;animation-delay:9s}
+
+@keyframes fallStar{
+  from{transform:translateY(0) scale(1)}
+  to{transform:translateY(130vh) scale(1.2)}
+}
+
+.cloudSlow{
+  position:absolute;
+  top:-20%;
+  font-size:64px;
+  opacity:.12;
+  animation: fallCloud 90s linear infinite;
+}
+.cloudSlow1{left:10%}
+.cloudSlow2{left:55%;animation-delay:45s}
+
+@keyframes fallCloud{
+  from{transform:translateY(0)}
+  to{transform:translateY(160vh)}
+}
+
+.star{position:absolute;font-size:16px;opacity:.6;animation:twinkleStar 3s ease-in-out infinite}
+.star1{top:15%;left:10%}
+.star2{top:35%;left:85%}
+.star3{top:55%;left:60%}
+.star4{top:75%;left:20%}
+@keyframes twinkleStar{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.9;transform:scale(1.3)}}
+
+.cloudSlow{position:absolute;font-size:64px;opacity:.12;animation:driftSlow 90s linear infinite}
+.cloudSlow1{top:10%;left:-30%}
+.cloudSlow2{top:30%;left:-60%;animation-delay:45s}
+@keyframes driftSlow{from{transform:translateX(0)}to{transform:translateX(180vw)}}
+
+.heartFloat{position:absolute;font-size:20px;opacity:.5;animation:floatHeart 14s linear infinite}
+.hf1{left:15%;bottom:-15%}
+.hf2{left:40%;bottom:-20%;animation-delay:5s}
+.hf3{left:65%;bottom:-25%;animation-delay:9s}
+.hf4{left:85%;bottom:-30%;animation-delay:13s}
+@keyframes floatHeart{from{transform:translateY(0)}to{transform:translateY(-140vh)}}
+
+</style>
+</head>
+<body>
+
+<div class="star star1">⭐</div>
+<div class="star star2">⭐</div>
+<div class="star star3">⭐</div>
+<div class="star star4">⭐</div>
+<div class="cloudSlow cloudSlow1">☁️</div>
+<div class="cloudSlow cloudSlow2">☁️</div>
+<div class="heartFloat hf1">💖</div>
+<div class="heartFloat hf2">💗</div>
+<div class="heartFloat hf3">💕</div>
+<div class="heartFloat hf4">💞</div>
+
+
+<audio id="bgm" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+
+<!-- ambience -->
+<div class="cloud c1">☁️</div><div class="cloud c2">☁️</div>
+<div class="butterfly b1">🦋</div><div class="butterfly b2">🦋</div><div class="butterfly b3">🦋</div>
+<div class="heart h1">💖</div><div class="heart h2">💕</div><div class="heart h3">💗</div>
+<div class="sparkle s1">✨</div><div class="sparkle s2">✨</div><div class="sparkle s3">✨</div>
+
+<div class="book">
+
+  <!-- COVER -->
+  <div class="page active">
+    
+<div class="music-toggle" onclick="toggleMusic()">🔊 Music</div>
+
+    <div class="cake">🎂<div class="flame">🔥</div></div>
+    <h1>Happy 16th Birthday</h1>
+    <div class="name">Bhargavi</div>
+    <div class="sub hand">A little book made with love 💕</div>
+    <div class="controls">
+      <button class="btn" onclick="start()">Open Book 📖</button>
+    </div>
+    <div class="page-num">Page 1</div>
+  </div>
+
+  <!-- pages -->
+  <div class="page"><div class="content"><div class="photo"><div class="tape"></div><img src="img1.jpg"></div><div class="letter hand">This page is for your smile — soft, genuine, and capable of making ordinary moments feel special.</div></div><div class="controls"><button class="btn" onclick="back()">Back</button><button class="btn" onclick="next()">Next</button></div><div class="page-num">Page 2</div></div>
+  <div class="page"><div class="content"><div class="photo"><div class="tape"></div><img src="img2.jpg"></div><div class="letter hand">Sixteen is about becoming — learning, growing, and finding yourself one step at a time.</div></div><div class="controls"><button class="btn" onclick="back()">Back</button><button class="btn" onclick="next()">Next</button></div><div class="page-num">Page 3</div></div>
+  <div class="page"><div class="content"><div class="photo"><div class="tape"></div><img src="img3.jpg"></div><div class="letter hand">Growing up doesn’t mean changing who you are, it means becoming more of yourself.</div></div><div class="controls"><button class="btn" onclick="back()">Back</button><button class="btn" onclick="next()">Next</button></div><div class="page-num">Page 4</div></div>
+  <div class="page"><div class="content"><div class="photo"><div class="tape"></div><img src="img4.jpg"></div><div class="letter hand">Your future is bright, colorful, and full of stories yet to be written.</div></div><div class="controls"><button class="btn" onclick="back()">Back</button><button class="btn" onclick="next()">Next</button></div><div class="page-num">Page 5</div></div>
+  <div class="page"><div class="hand" style="font-size:22px;line-height:1.85;max-width:660px;margin:70px auto 0;text-align:center;color:#333">Yoo! Bharg,<br><br>this is what I was trying to make, and I finally completed it, ig.<br><br>Hope you like this, and I wish you a very happy birthday, bbg 😘.<br><br>I’m always with you and always ready to hear your yapps —<br>and be ready to listen to my yappings too,<br>because we both are yappers, as you said 😛.<br><br>Made with love 🤙☺️</div><div class="controls"><button class="btn" onclick="back()">Back</button></div><div class="page-num">Final Page</div></div>
+
+</div>
+
+
+<script>
+let i=0;const pages=document.querySelectorAll('.page');
+function show(n){pages[i].classList.remove('active');i=n;pages[i].classList.add('active');}
+function start(){const a=document.getElementById('bgm');a.play().catch(()=>{});show(1);}function next(){if(i<pages.length-1)show(i+1);}function back(){if(i>0)show(i-1);}
+
+
+function toggleMusic(){
+  const a=document.getElementById('bgm');
+  if(a.paused){a.play().catch(()=>{});}else{a.pause();}
+}
+
+</script>
+</body>
+</html>
